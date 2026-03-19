@@ -1,48 +1,294 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Website</title>
-    <style>
-        /* ここにデザイン（CSS）を書いています */
-        body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f2f5;
-        }
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        h1 { color: #333; }
-        p { color: #666; }
-        .link {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FILL OS - スマート治具カタログ</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+      --text-main: #f0f0f0;
+      --text-sub: #a0a0a0;
+      --accent: #00e676; /* ネオングリーン */
+      --accent-hover: #69f0ae;
+      --border-color: #333333;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px 30px;
+      background: linear-gradient(180deg, #0a0a0a 0%, #121212 100%);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      letter-spacing: 2px;
+      color: var(--accent);
+    }
+
+    p.concept {
+      font-size: 1.1rem;
+      color: var(--text-sub);
+      margin-top: 10px;
+      font-weight: 300;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* 3ステップの解説領域 */
+    .steps-box {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 25px;
+      margin: 30px 0;
+      border-left: 5px solid var(--accent);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .steps-box h2 {
+      margin-top: 0;
+      font-size: 1.4rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    .step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .step-list li {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: baseline;
+    }
+
+    .step-num {
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-right: 15px;
+    }
+
+    /* カタログ領域 */
+    .catalog-title {
+      text-align: center;
+      margin: 50px 0 20px;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 25px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      border: 1px solid #2a2a2a;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .jig-badge {
+      display: inline-block;
+      background-color: var(--accent);
+      color: #000;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    .card h3 {
+      margin: 0 0 20px 0;
+      font-size: 1.6rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 15px;
+    }
+
+    .detail-section {
+      margin-bottom: 15px;
+    }
+
+    .detail-title {
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .detail-text {
+      color: #d0d0d0;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .example-list {
+      margin: 5px 0 0 0;
+      padding-left: 20px;
+      color: #d0d0d0;
+    }
+
+    .example-list li {
+      margin-bottom: 5px;
+    }
+
+    /* フッター領域 */
+    .return-section {
+      text-align: center;
+      margin: 60px 0 40px;
+      padding: 30px;
+      background-color: #1a1a1a;
+      border-radius: 12px;
+      border: 1px dashed var(--border-color);
+    }
+
+    .return-section p {
+      color: var(--text-sub);
+      margin: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--text-sub);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1>こんにちは！</h1>
-        <p>GitHub Pagesへようこそ。</p>
-        <p>これは、私が初めて公開したWebサイトです。</p>
-        <a href="https://github.com/" class="link">私のGitHubプロフィールへ</a>
+  <header>
+    <h1>FILL OS</h1>
+    <p class="concept">賢すぎない道具を、自分たちで手入れする。</p>
+  </header>
+
+  <div class="container">
+    
+    <div class="steps-box">
+      <h2>道具の仕立て方（3ステップ）</h2>
+      <ul class="step-list">
+        <li>
+          <span class="step-num">1. 探す</span>
+          <span>このカタログから、今の現場の課題に合う「治具の番号（4桁）」を見つけます。</span>
+        </li>
+        <li>
+          <span class="step-num">2. 呼ぶ</span>
+          <span>手元のM5StickCのQRコードをスマホで読み、番号を入力して治具を呼び出します（OTA）。</span>
+        </li>
+        <li>
+          <span class="step-num">3. 手入れする</span>
+          <span>画面に表示される新しいQRコードを読み、「これより近づいたら赤くする」など、現場の環境に合わせて感度を調律します。</span>
+        </li>
+      </ul>
     </div>
+
+    <h2 class="catalog-title">スマート治具レシピ</h2>
+
+    <div class="card">
+      <div class="jig-badge">Recipe #1001</div>
+      <h3>傾きセンサー（姿勢の番人）</h3>
+      
+      <div class="detail-section">
+        <div class="detail-title">何を測るか</div>
+        <p class="detail-text">モノの傾斜角度、フタや扉の開閉状態</p>
+      </div>
+      
+      <div class="detail-section">
+        <div class="detail-title">現場での Civic care（活用例）</div>
+        <ul class="example-list">
+          <li>「劇薬タンクのフタ、作業後にしっかり閉まっているか？」</li>
+          <li>「運搬台車が斜めになって、上の資材が崩れる危険はないか？」</li>
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-title">手入れのポイント</div>
+        <p class="detail-text">現場の安全基準に合わせて、「何度以上傾いたら警告（赤画面）にするか」をスマホから1度単位で調整できます。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="jig-badge">Recipe #1002</div>
+      <h3>騒音センサー（音の風景）</h3>
+      
+      <div class="detail-section">
+        <div class="detail-title">何を測るか</div>
+        <p class="detail-text">空間の音量レベル、機械のうなり・異音</p>
+      </div>
+      
+      <div class="detail-section">
+        <div class="detail-title">現場での Civic care（活用例）</div>
+        <ul class="example-list">
+          <li>「充填ラインのポンプ、いつもより苦しそうな音を出していないか？」</li>
+          <li>「分析室やオフィス、作業に集中できる静けさが保たれているか？」</li>
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-title">手入れのポイント</div>
+        <p class="detail-text">「この音量を超えたら異常とする（しきい値）」と「マイクの集音感度」の2つを、実際の環境音を聞きながらスマホで調律できます。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="jig-badge">Recipe #1003</div>
+      <h3>距離センサー（空間の物差し）</h3>
+      
+      <div class="detail-section">
+        <div class="detail-title">何を測るか</div>
+        <p class="detail-text">対象物までの物理的な距離、液面や段ボールの高さ</p>
+      </div>
+      
+      <div class="detail-section">
+        <div class="detail-title">現場での Civic care（活用例）</div>
+        <ul class="example-list">
+          <li>「原料タンクの残量液面、そろそろ補充が必要なラインまできたか？」</li>
+          <li>「パレットに積まれた段ボール、規定の高さ（上限）に達したか？」</li>
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <div class="detail-title">手入れのポイント</div>
+        <p class="detail-text">「何センチまで近づいたら（減ったら・積まれたら）警告するか」を、現場のスケール感に合わせて調整可能です。</p>
+      </div>
+    </div>
+
+    <div class="return-section">
+      <p><strong>💡 別の治具を試したくなったら</strong></p>
+      <p>スマホの調律画面にある「初期化ボタン」を押すか、<br>本体のAボタン（M5ボタン）を2秒長押ししてください。<br>いつでもまっさらなベースOS（0000）に帰還できます。</p>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2026 FILL OS Project. All rights reserved.
+  </footer>
 
 </body>
 </html>
