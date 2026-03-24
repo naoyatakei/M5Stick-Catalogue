@@ -1,314 +1,106 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>スマート道具カタログ</title>
-  <style>
-    :root {
-      --bg-color: #121212;
-      --card-bg: #1e1e1e;
-      --text-main: #f0f0f0;
-      --text-sub: #a0a0a0;
-      --accent: #00e676; /* ネオングリーン */
-      --accent-hover: #69f0ae;
-      --border-color: #333333;
-    }
+<style>
+  /* カタログのベーススタイル（既存のCSSがある場合は適宜マージしてください） */
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background-color: #121212;
+  }
+  .recipe-card {
+    background-color: #1e1e1e;
+    border-left: 5px solid #39ff14; /* ネオングリーンのアクセント */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    color: #ffffff;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+  .recipe-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+  }
+  .recipe-id {
+    color: #39ff14;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  .recipe-sensor {
+    color: #aaaaaa;
+    font-size: 0.8rem;
+  }
+  .recipe-title {
+    margin: 10px 0;
+    font-size: 1.4rem;
+    color: #f0f0f0;
+  }
+  .recipe-desc {
+    color: #bbbbbb;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+  .btn-install {
+    display: block;
+    text-align: center;
+    background-color: #2a2a2a;
+    color: #39ff14;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #39ff14;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  .btn-install:hover {
+    background-color: #39ff14;
+    color: #121212;
+  }
+</style>
 
-    body {
-      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-    }
+<div class="catalog-grid">
 
-    header {
-      text-align: center;
-      padding: 50px 20px 30px;
-      background: linear-gradient(180deg, #0a0a0a 0%, #121212 100%);
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin: 0;
-      letter-spacing: 2px;
-      color: var(--accent);
-    }
-
-    p.concept {
-      font-size: 1.1rem;
-      color: var(--text-sub);
-      margin-top: 10px;
-      font-weight: 300;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    /* 3ステップの解説領域 */
-    .steps-box {
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      padding: 25px;
-      margin: 30px 0;
-      border-left: 5px solid var(--accent);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    }
-
-    .steps-box h2 {
-      margin-top: 0;
-      font-size: 1.4rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 10px;
-    }
-
-    .step-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .step-list li {
-      margin-bottom: 15px;
-      display: flex;
-      align-items: baseline;
-    }
-
-    .step-num {
-      color: var(--accent);
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin-right: 15px;
-    }
-
-    /* カタログ領域 */
-    .catalog-title {
-      text-align: center;
-      margin: 50px 0 20px;
-      font-size: 1.8rem;
-      letter-spacing: 1px;
-    }
-
-    .card {
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      padding: 30px;
-      margin-bottom: 25px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-      border: 1px solid #2a2a2a;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent);
-    }
-
-    .jig-badge {
-      display: inline-block;
-      background-color: var(--accent);
-      color: #000;
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-weight: bold;
-      font-size: 0.9rem;
-      margin-bottom: 15px;
-      letter-spacing: 1px;
-    }
-
-    .card h3 {
-      margin: 0 0 20px 0;
-      font-size: 1.6rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 15px;
-    }
-
-    .detail-section {
-      margin-bottom: 15px;
-    }
-
-    .detail-title {
-      font-size: 0.9rem;
-      color: var(--accent);
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    .detail-text {
-      color: #d0d0d0;
-      margin: 0;
-      font-size: 1rem;
-    }
-
-    .example-list {
-      margin: 5px 0 0 0;
-      padding-left: 20px;
-      color: #d0d0d0;
-    }
-
-    .example-list li {
-      margin-bottom: 5px;
-    }
-
-    .btn-setup {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 10px 20px;
-      background-color: transparent;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.2s ease;
-    }
-    .btn-setup:hover {
-      background-color: var(--accent);
-      color: #000;
-    }
-
-    /* フッター領域 */
-    .return-section {
-      text-align: center;
-      margin: 60px 0 40px;
-      padding: 30px;
-      background-color: #1a1a1a;
-      border-radius: 12px;
-      border: 1px dashed var(--border-color);
-    }
-
-    .return-section p {
-      color: var(--text-sub);
-      margin: 0;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: var(--text-sub);
-      font-size: 0.9rem;
-      border-top: 1px solid var(--border-color);
-      margin-top: 20px;
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>スマート道具　カタログ</h1>
-    <p class="concept">賢すぎない道具で、身の周りを手入れする。</p>
-  </header>
-
-  <div class="container">
-    
-    <div class="steps-box">
-      <h2>道具のつくり方（3ステップ）</h2>
-      <ul class="step-list">
-        <li>
-          <span class="step-num">1. 探す</span>
-          <span>このカタログから、今の現場の課題に合う「道具の番号（4桁）」を見つけます。</span>
-        </li>
-        <li>
-          <span class="step-num">2. 呼ぶ</span>
-          <span>手元のM5StickCのQRコードをスマホで読み、番号を入力して道具を呼び出します。</span>
-        </li>
-        <li>
-          <span class="step-num">3. 調整する</span>
-          <span>画面に表示される新しいQRコードを読み、「これより近づいたら赤くする」など、現場の環境に合わせて感度などを調整します。</span>
-        </li>
-      </ul>
+  <div class="recipe-card">
+    <div class="recipe-header">
+      <span class="recipe-id">#1004</span>
+      <span class="recipe-sensor">温湿度センサ (I2C)</span>
     </div>
-
-    <h2 class="catalog-title">スマート道具レシピ</h2>
-
-    <div class="card">
-      <div class="jig-badge">Recipe #1001</div>
-      <h3>傾きセンサー</h3>
-      
-      <div class="detail-section">
-        <div class="detail-title">何を測るか</div>
-        <p class="detail-text">モノの傾斜角度、フタや扉の開閉状態</p>
-      </div>
-      
-      <div class="detail-section">
-        <div class="detail-title">現場での活用例</div>
-        <ul class="example-list">
-          <li>「劇薬タンクのフタ、作業後にしっかり閉まっているか？」</li>
-          <li>「運搬台車が斜めになって、上の資材が崩れる危険はないか？」</li>
-        </ul>
-      </div>
-
-      <div class="detail-section">
-        <div class="detail-title">調整のポイント</div>
-        <p class="detail-text">現場の安全基準に合わせて、「何度以上傾いたら警告（赤画面）にするか」をスマホから1度単位で調整できます。</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="jig-badge">Recipe #1002</div>
-      <h3>騒音センサー</h3>
-      
-      <div class="detail-section">
-        <div class="detail-title">何を測るか</div>
-        <p class="detail-text">空間の音量レベル、機械のうなり・異音</p>
-      </div>
-      
-      <div class="detail-section">
-        <div class="detail-title">現場での活用例</div>
-        <ul class="example-list">
-          <li>「充填ラインのポンプ、いつもより苦しそうな音を出していないか？」</li>
-          <li>「分析室やオフィス、作業に集中できる静けさが保たれているか？」</li>
-        </ul>
-      </div>
-
-      <div class="detail-section">
-        <div class="detail-title">調整のポイント</div>
-        <p class="detail-text">「この音量を超えたら異常とする（しきい値）」と「マイクの集音感度」の2つを、実際の環境音を聞きながらスマホで調整できます。</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="jig-badge">Recipe #1003</div>
-      <h3>距離（超音波）センサー</h3>
-      
-      <div class="detail-section">
-        <div class="detail-title">何を測るか</div>
-        <p class="detail-text">対象物までの物理的な距離、液面や段ボールの高さ</p>
-      </div>
-      
-      <div class="detail-section">
-        <div class="detail-title">現場での活用例</div>
-        <ul class="example-list">
-          <li>「原料タンクの残量液面、そろそろ補充が必要なラインまできたか？」</li>
-          <li>「パレットに積まれた段ボール、規定の高さ（上限）に達したか？」</li>
-        </ul>
-      </div>
-
-      <div class="detail-section">
-        <div class="detail-title">調整のポイント</div>
-        <p class="detail-text">「何センチまで近づいたら（減ったら・積まれたら）警告するか」を、現場のスケール感に合わせて調整可能です。</p>
-      </div>
-      <a href="setup-1003.html" class="btn-setup">▶ センサーとケーブルの繋ぎ方を見る</a>
-    </div>
-
-    <div class="return-section">
-      <p><strong>💡 別の道具を試したくなったら</strong></p>
-      <p>スマホの調整画面にある「初期化ボタン」を押すか、
-        <br>本体のAボタン（M5ボタン）を2秒長押ししてください。
-        <br>いつでもまっさらな状態に戻れます。</p>
-    </div>
-
+    <h3 class="recipe-title">温湿度の調律</h3>
+    <p class="recipe-desc">
+      現場の「熱」と「湿り気」を監視する治具です。設定した温度（初期値：30℃）を超えると画面が赤く染まり警告します。作業者の熱中症対策や、設備の異常加熱の検知に。
+    </p>
+    <a href="1004.bin" class="btn-install">この治具のレシピを見る (1004)</a>
   </div>
 
-  <footer>
-    &copy; 2026 FILL OS Project. All rights reserved.
-  </footer>
+  <div class="recipe-card">
+    <div class="recipe-header">
+      <span class="recipe-id">#1005</span>
+      <span class="recipe-sensor">計量ユニット (I2C)</span>
+    </div>
+    <h3 class="recipe-title">計量の調律</h3>
+    <p class="recipe-desc">
+      現場の「重さ」を高精度に切り出す治具です。スマホ画面からの「ゼロ点合わせ（風袋引き）」に対応し、容器の重さを引いた正味の重量だけを直感的に表示します。
+    </p>
+    <a href="1005.bin" class="btn-install">この治具のレシピを見る (1005)</a>
+  </div>
 
-</body>
-</html>
+  <div class="recipe-card">
+    <div class="recipe-header">
+      <span class="recipe-id">#1006</span>
+      <span class="recipe-sensor">環境光センサ (I2C)</span>
+    </div>
+    <h3 class="recipe-title">環境光の調律</h3>
+    <p class="recipe-desc">
+      現場の「明るさ」を測る治具です。指定した照度（初期値：500 lx）を下回ると画面が赤くなり警告します。塗装の傷チェックや、精密な検査工程における照度不足の防止に。
+    </p>
+    <a href="1006.bin" class="btn-install">この治具のレシピを見る (1006)</a>
+  </div>
+
+</div>
