@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>環境光センサーの繋ぎ方 - FILL OS</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+      --text-main: #f0f0f0;
+      --text-sub: #a0a0a0;
+      --accent: #00e676;
+      --border-color: #333333;
+    }
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg-color); color: var(--text-main); margin: 0; padding: 20px; line-height: 1.6; }
+    .container { max-width: 600px; margin: 0 auto; background-color: var(--card-bg); padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); }
+    h2 { color: var(--accent); border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-top: 0; }
+    .step { margin-bottom: 30px; }
+    .step h3 { color: #fff; margin-bottom: 10px; }
+    .photo-placeholder { width: 100%; border-radius: 8px; border: 1px solid var(--border-color); margin: 10px 0; }
+    .note { background-color: rgba(255, 152, 0, 0.1); border-left: 4px solid #ff9800; padding: 10px 15px; color: #ffb74d; font-size: 0.9rem; }
+    .btn-back { display: block; text-align: center; margin-top: 40px; padding: 12px; background-color: #333; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; }
+    .btn-back:hover { background-color: #444; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>環境光センサー（#1006）の準備</h2>
+    <p>M5StickC本体と、環境光（照度）センサーを付属のケーブルで接続します。</p>
+
+    <div class="step">
+      <h3>1. ケーブルを繋ぐ</h3>
+      <p>付属の4本線ケーブル（Groveケーブル）を用意し、本体の下部にあるポートと、センサー側のポートにしっかりと挿し込みます。</p>
+      
+      <img src="IMG_1006.jpeg" alt="センサーの接続写真" class="photo-placeholder">
+      
+      <p class="note">※端子の形が決まっているため、逆向きには刺さらない安全設計になっています。カチッと手応えがあるまで、スッと入る向きで挿してください。</p>
+    </div>
+
+    <div class="step">
+      <h3>2. 測定のコツ（重要！）</h3>
+      <p>このセンサーは、人間の目に近い感度で「光の強さ（ルクス）」を測ります（1 〜 65535 lxまで対応）。</p>
+      <ul>
+        <li>センサーの受光部（丸いガラス面やドーム状の白い部分）を、明るさを測りたい方向（照明や作業台）へまっすぐ向けてください。</li>
+        <li>設置する際、作業者の手や体がセンサーの「影」に入ってしまうと、極端に暗い数値として誤検知されてしまいます。影ができにくい高い位置や、照明の真下などに固定するのがおすすめです。</li>
+      </ul>
+    </div>
+
+    <a href="index.html" class="btn-back">◀ カタログに戻る</a>
+  </div>
+
+</body>
+</html>

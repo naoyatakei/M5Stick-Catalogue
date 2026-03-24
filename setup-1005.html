@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>計量ユニットの繋ぎ方 - FILL OS</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+      --text-main: #f0f0f0;
+      --text-sub: #a0a0a0;
+      --accent: #00e676;
+      --border-color: #333333;
+    }
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg-color); color: var(--text-main); margin: 0; padding: 20px; line-height: 1.6; }
+    .container { max-width: 600px; margin: 0 auto; background-color: var(--card-bg); padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); }
+    h2 { color: var(--accent); border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-top: 0; }
+    .step { margin-bottom: 30px; }
+    .step h3 { color: #fff; margin-bottom: 10px; }
+    .photo-placeholder { width: 100%; border-radius: 8px; border: 1px solid var(--border-color); margin: 10px 0; }
+    .note { background-color: rgba(255, 152, 0, 0.1); border-left: 4px solid #ff9800; padding: 10px 15px; color: #ffb74d; font-size: 0.9rem; }
+    .btn-back { display: block; text-align: center; margin-top: 40px; padding: 12px; background-color: #333; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; }
+    .btn-back:hover { background-color: #444; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>計量ユニット（#1005）の準備</h2>
+    <p>M5StickC本体と、計量ユニット（ロードセル）を付属のケーブルで接続します。</p>
+
+    <div class="step">
+      <h3>1. ケーブルを繋ぐ</h3>
+      <p>付属の4本線ケーブル（Groveケーブル）を用意し、本体の下部にあるポートと、計量ユニット基板側のポートにしっかりと挿し込みます。</p>
+      
+      <img src="IMG_1005.jpeg" alt="センサーの接続写真" class="photo-placeholder">
+      
+      <p class="note">※端子の形が決まっているため、逆向きには刺さらない安全設計になっています。カチッと手応えがあるまで、スッと入る向きで挿してください。</p>
+    </div>
+
+    <div class="step">
+      <h3>2. 測定のコツ（重要！）</h3>
+      <p>このユニットは、金属の棒（ロードセル）が重さで「たわむ（曲がる）」ことを利用して重さを測ります。</p>
+      <ul>
+        <li>金属の側面に<strong>「矢印（↓）」のシールや刻印</strong>があります。重さをかける方向と矢印の向きが同じになるように設置してください。</li>
+        <li>空中で手で持って測ると数値が安定しません。必ず平らで硬い机や土台の上にネジ等で固定して使用してください。</li>
+        <li>測定物を載せない状態で、スマホ画面から「ゼロ点合わせ」ボタンを押すと、基準がリセットされて正確に測れます。</li>
+      </ul>
+    </div>
+
+    <a href="index.html" class="btn-back">◀ カタログに戻る</a>
+  </div>
+
+</body>
+</html>
